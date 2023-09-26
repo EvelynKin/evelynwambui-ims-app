@@ -7,33 +7,22 @@
  */
 package com.equitytest.evelynwambui_ims_app.domain.enum_;
 
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-public enum UserRoles {
+@Setter
+@ToString
+@Entity
+@Table(name = "user_roles")
+public class UserRoles {
 
-  SYSTEM_AUTH_USER("SAUS"), // System authentication user
-  ADMIN_USER("ADUS"), // Administrator user
-  REGULAR_USER("REUS"); // Ordinary user
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  private final String userRole;
-
-  UserRoles(String userRole) {
-    this.userRole = userRole;
-  }
-
-  /**
-   * Method to convert UserRole shortname to enum
-   *
-   * @param user - User - shortname
-   * @return UserRole
-   */
-  public static UserRoles fromShortName(String user) {
-    return switch (user) {
-      case "SYUS" -> UserRoles.SYSTEM_AUTH_USER;
-      case "ADUS" -> UserRoles.ADMIN_USER;
-      case "REUS" -> UserRoles.REGULAR_USER;
-      default -> throw new IllegalArgumentException("Unknown user role : " + user);
-    };
-  }
+  @Column(name = "role_name", nullable = false, unique = true)
+  private String roleName;
 }

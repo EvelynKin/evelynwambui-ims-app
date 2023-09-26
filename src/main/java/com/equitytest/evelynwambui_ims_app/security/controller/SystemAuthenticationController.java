@@ -9,7 +9,6 @@ package com.equitytest.evelynwambui_ims_app.security.controller;
 import com.equitytest.evelynwambui_ims_app.security.dto.input.SystemAuthRequest;
 import com.equitytest.evelynwambui_ims_app.security.dto.input.SystemAuthUserRegistrationRequest;
 import com.equitytest.evelynwambui_ims_app.security.dto.output.AuthResponse;
-import com.equitytest.evelynwambui_ims_app.security.entity.SystemAuthUser;
 import com.equitytest.evelynwambui_ims_app.security.service.SystemAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

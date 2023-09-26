@@ -7,7 +7,6 @@
  */
 package com.equitytest.evelynwambui_ims_app.security.repository;
 
-import com.equitytest.evelynwambui_ims_app.security.entity.SystemAuthUser;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;

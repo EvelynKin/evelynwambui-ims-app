@@ -17,7 +17,6 @@ import java.util.Objects;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @Setter
@@ -27,7 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 @Entity
 @Table(name = "system_user")
-public class RegularUserDetails implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
   @Id
   @Column(name = "user_id", nullable = false, unique = true, updatable = false, length = 45)
@@ -55,9 +54,8 @@ public class RegularUserDetails implements UserDetails {
   @Builder.Default
   private Boolean emailAddressVerified = false;
 
-
-  @Enumerated(EnumType.STRING)
-  @Column(name = "user_role")
+  @ManyToOne
+  @JoinColumn(name = "user_role_id", referencedColumnName = "id")
   private UserRoles userRoles;
 
   /**
@@ -67,7 +65,7 @@ public class RegularUserDetails implements UserDetails {
    */
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(userRoles.name()));
+    return List.of(new SimpleGrantedAuthority(userRoles.getRoleName()));
   }
 
   @Override
@@ -93,7 +91,7 @@ public class RegularUserDetails implements UserDetails {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof RegularUserDetails that)) return false;
+    if (!(o instanceof UserDetails that)) return false;
     return Objects.equals(userId, that.userId)
         && Objects.equals(fullName, that.fullName)
         && Objects.equals(username, that.username)
