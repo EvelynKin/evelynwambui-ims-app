@@ -7,12 +7,12 @@
  */
 package com.equitytest.evelynwambui_ims_app.domain.enum_converter;
 
-import com.equitytest.evelynwambui_ims_app.domain.enum_.UserRoles;
+import com.equitytest.evelynwambui_ims_app.domain.enum_.UserRole;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter(autoApply = true)
-public class UserRolesEnumConverter implements AttributeConverter<UserRoles, String> {
+public class UserRolesEnumConverter implements AttributeConverter<UserRole, String> {
 
   /**
    * Method to convert entity attribute to database column
@@ -21,7 +21,7 @@ public class UserRolesEnumConverter implements AttributeConverter<UserRoles, Str
    * @return Character - short name
    */
   @Override
-  public String convertToDatabaseColumn(UserRoles attribute) {
+  public String convertToDatabaseColumn(UserRole attribute) {
     return attribute.getUserRole();
   }
 
@@ -32,7 +32,7 @@ public class UserRolesEnumConverter implements AttributeConverter<UserRoles, Str
    * @return UserRole - Enum class
    */
   @Override
-  public UserRoles convertToEntityAttribute(String dbData) {
-    return UserRoles.fromShortName(dbData);
+  public UserRole convertToEntityAttribute(String dbData) {
+    return UserRole.fromShortName(dbData);
   }
 }

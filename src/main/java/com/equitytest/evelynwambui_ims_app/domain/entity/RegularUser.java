@@ -6,7 +6,7 @@
  */
 package com.equitytest.evelynwambui_ims_app.domain.entity;
 
-import com.equitytest.evelynwambui_ims_app.domain.enum_.UserRoles;
+import com.equitytest.evelynwambui_ims_app.domain.enum_.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @DiscriminatorValue("REGULAR")
 public class RegularUser extends User {
   @Column(name = "user_role", insertable = false, updatable = false)
-  private UserRoles userRole;
+  private UserRole userRole;
   @Column(name = "phone_number")
   private String phoneNumber;
 

@@ -7,20 +7,22 @@
  */
 package com.equitytest.evelynwambui_ims_app.domain.entity;
 
-import com.equitytest.evelynwambui_ims_app.domain.enum_.UserRoles;
+import com.equitytest.evelynwambui_ims_app.domain.enum_.UserRole;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -29,7 +31,7 @@ public abstract class User implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long userId;
+  private String userId;
 
   @Column(name = "full_name")
   private String fullName;
@@ -54,14 +56,14 @@ public abstract class User implements UserDetails {
   private Boolean emailAddressVerified = false;
 
   @Transient
-  public UserRoles getUserRole() {
+  public UserRole getUserRole() {
     if (this instanceof SystemUser) {
-      return UserRoles.SYSTEM_USER; // You may need to adjust this based on your actual logic
+      return UserRole.SYSTEM_USER; // You may need to adjust this based on your actual logic
     } else if (this instanceof AdminUser) {
-      return UserRoles.ADMIN_USER; // Adjust as needed
+      return UserRole.ADMIN_USER; // Adjust as needed
     } else if (this instanceof RegularUser) {
       // Handle other possible subclasses or return a default value
-      return UserRoles.REGULAR_USER;
+      return UserRole.REGULAR_USER;
     } else {
       throw new IllegalStateException(
           "Unsupported user subclass: " + this.getClass().getSimpleName());
