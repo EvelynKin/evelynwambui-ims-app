@@ -13,6 +13,7 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("SYSTEM")
 public class SystemUser extends User {
+
   @Column(name = "account_enabled")
   private String accountEnabled;
 }
