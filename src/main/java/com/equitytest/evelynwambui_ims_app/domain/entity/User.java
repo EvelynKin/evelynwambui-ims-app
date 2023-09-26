@@ -43,10 +43,6 @@ public abstract class User implements UserDetails {
   @Column(name = "email_address")
   private String emailAddress;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "user_role")
-  private UserRoles userRole;
-
   @Column(name = "created_at_ts", nullable = false)
   private LocalDateTime createdAtTimestamp;
 
@@ -57,9 +53,24 @@ public abstract class User implements UserDetails {
   @Builder.Default
   private Boolean emailAddressVerified = false;
 
+  @Transient
+  public UserRoles getUserRole() {
+    if (this instanceof SystemUser) {
+      return UserRoles.SYSTEM_USER; // You may need to adjust this based on your actual logic
+    } else if (this instanceof AdminUser) {
+      return UserRoles.ADMIN_USER; // Adjust as needed
+    } else if (this instanceof RegularUser) {
+      // Handle other possible subclasses or return a default value
+      return UserRoles.REGULAR_USER;
+    } else {
+      throw new IllegalStateException(
+          "Unsupported user subclass: " + this.getClass().getSimpleName());
+    }
+  }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(userRole.name()));
+    return List.of(new SimpleGrantedAuthority(this.getUserRole().name()));
   }
 
   @Override
