@@ -11,8 +11,9 @@ import lombok.Getter;
 
 @Getter
 public enum UserRoles {
-  SYSTEM_USER("SYUS"), // System user
-  ADMIN_USER("ADUS"), // Administrator
+
+  SYSTEM_AUTH_USER("SAUS"), // System authentication user
+  ADMIN_USER("ADUS"), // Administrator user
   REGULAR_USER("REUS"); // Ordinary user
 
   private final String userRole;
@@ -29,7 +30,7 @@ public enum UserRoles {
    */
   public static UserRoles fromShortName(String user) {
     return switch (user) {
-      case "SYUS" -> UserRoles.SYSTEM_USER;
+      case "SYUS" -> UserRoles.SYSTEM_AUTH_USER;
       case "ADUS" -> UserRoles.ADMIN_USER;
       case "REUS" -> UserRoles.REGULAR_USER;
       default -> throw new IllegalArgumentException("Unknown user role : " + user);

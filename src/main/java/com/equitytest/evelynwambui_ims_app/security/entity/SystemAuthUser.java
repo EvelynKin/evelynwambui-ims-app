@@ -25,7 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "auth_user") // Have underscore to avoid ambiguity with postgres user table
+@Table(name = "system_user") // Have underscore to avoid ambiguity with postgres user table
 public class SystemAuthUser implements UserDetails {
 
   @Id

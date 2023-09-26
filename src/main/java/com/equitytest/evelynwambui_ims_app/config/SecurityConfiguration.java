@@ -6,7 +6,7 @@
  * @since 1.0.0
  */
 
-package com.equitytest.evelynwambui_ims_app.configs;
+package com.equitytest.evelynwambui_ims_app.config;
 
 import com.equitytest.evelynwambui_ims_app.security.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;

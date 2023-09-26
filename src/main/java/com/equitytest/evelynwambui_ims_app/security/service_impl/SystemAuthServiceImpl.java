@@ -60,7 +60,7 @@ public class SystemAuthServiceImpl implements SystemAuthService {
         SystemAuthUser.builder()
             .username(systemAuthUserRegistrationRequest.getUsername())
             .password(passwordEncoder.encode(systemAuthUserRegistrationRequest.getPassword()))
-            .userRoles(UserRoles.SYSTEM_USER)
+            .userRoles(UserRoles.SYSTEM_AUTH_USER)
             .build();
 
     systemAuthUserRepository.save(authenticationUser);
