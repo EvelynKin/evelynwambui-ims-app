@@ -1,5 +1,5 @@
 /**
- * @author David Kariuki
+ * @author Evelyn Wambui
  * @version 1.0.0
  * @apiNote UserRole enum
  * @created 01/05/2023

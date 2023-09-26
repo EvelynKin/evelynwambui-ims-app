@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @apiNote class
- * @author David Kariuki
+ * @author Evelyn Wambui
  * @version 1.0.0
  * @created 26/09/2023
  * @see

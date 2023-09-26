@@ -1,5 +1,5 @@
 /**
- * @author David Kariuki
+ * @author Evelyn Wambui
  * @version 1.0.0
  * @apiNote UserRoleEnumConverter class
  * @created 25/09/2023
