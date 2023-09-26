@@ -10,20 +10,28 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 @Entity
 @DiscriminatorValue("ADMIN")
 public class AdminUser extends User {
+
+  @Column(name = "admin_created_by")
+  private String adminCreatedBy;
+
+  @Column(name = "user_description", nullable = false, length = 300)
+  private String userDescription;
 
   @Column(name = "two_factor_enabled", nullable = false, columnDefinition = "BOOLEAN")
   @Builder.Default
   private Boolean twoFactorEnabled = false;
 
-  @Column(name = "access_level")
-  private String accessLevel;
-
-  @Column(name = "admin_created_by")
-  private String adminCreatedBy;
-
-  private String twoFactorSecret;
+  @Column(name = "two_factor_secret", nullable = true)
+  @Builder.Default
+  private String twoFactorSecret = null;
 }

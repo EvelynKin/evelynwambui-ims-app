@@ -43,4 +43,5 @@ public class UserController {
       @RequestParam @Valid UserManagementRequest userManagementRequest) {
     return userService.logoutUser(userManagementRequest);
   }
+
 }

@@ -11,9 +11,11 @@ package com.equitytest.evelynwambui_ims_app.dto.input;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.persistence.Column;
 import lombok.*;
 
 import javax.annotation.Generated;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -39,4 +41,23 @@ public class UserManagementRequest {
 
   @JsonProperty("userRole")
   private String userRole;
+
+  @JsonProperty("user_description")
+  private String userDescription;
+
+  @JsonProperty("two_factor_enabled")
+  @Builder.Default
+  private Boolean twoFactorEnabled = false;
+
+  @JsonProperty("two_factor_secret")
+  private String twoFactorSecret;
+
+  @JsonProperty("admin_created_by")
+  private String adminCreatedBy;
+
+  @JsonProperty("phone_number")
+  private String phoneNumber;
+
+  @JsonProperty("dob")
+  private LocalDate dateOfBirth;
 }

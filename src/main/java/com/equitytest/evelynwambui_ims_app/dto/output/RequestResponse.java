@@ -27,7 +27,7 @@ public abstract class RequestResponse {
   private Boolean error;
 
   @JsonProperty("responseCode")
-  private Boolean responseCode;
+  private Integer responseCode;
 
   @JsonProperty("message")
   private String message;

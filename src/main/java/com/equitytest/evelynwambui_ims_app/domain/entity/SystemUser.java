@@ -9,11 +9,26 @@ package com.equitytest.evelynwambui_ims_app.domain.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 @Entity
 @DiscriminatorValue("SYSTEM")
 public class SystemUser extends User {
 
-  @Column(name = "account_enabled")
-  private String accountEnabled;
+  @Column(name = "user_description", nullable = false, length = 300)
+  private String userDescription;
+
+  @Column(name = "two_factor_enabled", nullable = false, columnDefinition = "BOOLEAN")
+  @Builder.Default
+  private Boolean twoFactorEnabled = false;
+
+  @Column(name = "two_factor_secret", nullable = true)
+  @Builder.Default
+  private String twoFactorSecret = null;
 }
