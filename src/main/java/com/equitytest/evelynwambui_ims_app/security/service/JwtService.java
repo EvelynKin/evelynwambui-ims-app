@@ -49,7 +49,7 @@ public interface JwtService {
    * @param regularUserDetails - RegularUserDetails
    * @return String
    */
-  String generateToken(@NonNull RegularUserDetails regularUserDetails);
+  //String generateToken(@NonNull RegularUserDetails regularUserDetails);
 
   /**
    * Method to generate token JWT token for regular user
@@ -58,8 +58,7 @@ public interface JwtService {
    * @param userDetails - UserDetails
    * @return String
    */
-  String generateToken(
-      @NonNull Map<String, Object> extraClaims, @NonNull RegularUserDetails userDetails);
+  //String generateToken(@NonNull Map<String, Object> extraClaims, @NonNull RegularUserDetails userDetails);
 
   /**
    * Method to extract username from JWT token

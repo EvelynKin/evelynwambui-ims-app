@@ -3,18 +3,18 @@
  * @version 1.0.0
  * @apiNote AuthenticationServiceImpl class
  * @created 01/05/2023
- * @see com.liniantt.duesclerk.backend_api.security.service.SystemAuthService
+ * @see com.equitytest.evelynwambui_ims_app.security.service.SystemAuthService
  * @since 1.0.0
  */
 package com.equitytest.evelynwambui_ims_app.security.service_impl;
 
-import com.liniantt.duesclerk.backend_api.domain.enum_.UserRoles;
-import com.liniantt.duesclerk.backend_api.security.dto.input.SystemAuthRequest;
-import com.liniantt.duesclerk.backend_api.security.dto.input.SystemAuthUserRegistrationRequest;
-import com.liniantt.duesclerk.backend_api.security.dto.output.AuthResponse;
-import com.liniantt.duesclerk.backend_api.security.entity.SystemAuthUser;
-import com.liniantt.duesclerk.backend_api.security.repository.SystemAuthUserRepository;
-import com.liniantt.duesclerk.backend_api.security.service.SystemAuthService;
+import com.equitytest.evelynwambui_ims_app.domain.enum_.UserRoles;
+import com.equitytest.evelynwambui_ims_app.security.dto.input.SystemAuthRequest;
+import com.equitytest.evelynwambui_ims_app.security.dto.input.SystemAuthUserRegistrationRequest;
+import com.equitytest.evelynwambui_ims_app.security.dto.output.AuthResponse;
+import com.equitytest.evelynwambui_ims_app.security.entity.SystemAuthUser;
+import com.equitytest.evelynwambui_ims_app.security.repository.SystemAuthUserRepository;
+import com.equitytest.evelynwambui_ims_app.security.service.SystemAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
