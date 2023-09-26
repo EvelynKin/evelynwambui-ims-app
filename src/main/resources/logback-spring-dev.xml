@@ -12,7 +12,7 @@
     <logger name="org.springframework" level="INFO"/>
 
     <!-- Your Application's Package Logger (Debug level for development) -->
-    <logger name="com.liniantt.duesclerk.backend_api" level="DEBUG"/>
+    <logger name="com.equitytest.evelynwambui_ims_app" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="Console"/>

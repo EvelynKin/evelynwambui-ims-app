@@ -23,7 +23,7 @@
     <logger name="org.springframework" level="INFO"/>
 
     <!-- Your Application's Package Logger (INFO level for production) -->
-    <logger name="com.liniantt.duesclerk.backend_api" level="INFO"/>
+    <logger name="com.equitytest.evelynwambui_ims_app" level="INFO"/>
 
     <root level="INFO">
         <appender-ref ref="File"/>
