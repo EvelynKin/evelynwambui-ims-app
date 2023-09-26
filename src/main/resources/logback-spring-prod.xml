@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Define the log file directory -->
+    <property name="logPath" value="logs"/>
+
+    <!-- Define the log file name -->
+    <property name="logFileName" value="app.log"/>
+
+    <!-- Rolling File Appender -->
+    <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${logFileName}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/${logFileName}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Spring Framework Logger -->
+    <logger name="org.springframework" level="INFO"/>
+
+    <!-- Your Application's Package Logger (INFO level for production) -->
+    <logger name="com.liniantt.duesclerk.backend_api" level="INFO"/>
+
+    <root level="INFO">
+        <appender-ref ref="File"/>
+    </root>
+
+</configuration>
