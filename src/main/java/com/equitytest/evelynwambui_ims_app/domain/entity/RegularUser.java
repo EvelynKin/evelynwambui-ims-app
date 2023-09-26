@@ -10,21 +10,17 @@ import com.equitytest.evelynwambui_ims_app.domain.enum_.UserRoles;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Builder;
+
+import java.time.LocalDate;
 
 @Entity
-@DiscriminatorValue("ADMIN")
-public class AdminUser extends User {
+@DiscriminatorValue("REGULAR")
+public class RegularUser extends User {
   @Column(name = "user_role", insertable = false, updatable = false)
   private UserRoles userRole;
-  @Column(name = "access_level")
-  private String accessLevel;
+  @Column(name = "phone_number")
+  private String phoneNumber;
 
-  @Column(name = "admin_created_by")
-  private String adminCreatedBy;
-
-  private String twoFactorSecret;
-  @Column(name = "two_factor_enabled", nullable = false, columnDefinition = "BOOLEAN")
-  @Builder.Default
-  Boolean twoFactorEnabled = false;
+  @Column(name = "dob")
+  private LocalDate dateOfBirth;
 }
