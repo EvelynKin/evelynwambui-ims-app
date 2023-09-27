@@ -13,12 +13,14 @@ import com.equitytest.evelynwambui_ims_app.dto.output.RequestResponse;
 import com.equitytest.evelynwambui_ims_app.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RequestMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController
 @RequiredArgsConstructor
@@ -35,6 +37,7 @@ public class UserController {
   @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
   public RequestResponse registerUser(
       @RequestParam @Valid UserManagementRequest userManagementRequest) {
+    log.error(userManagementRequest.toString());
     return userService.registerUser(userManagementRequest);
   }
 
