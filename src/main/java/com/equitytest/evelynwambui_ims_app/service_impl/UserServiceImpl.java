@@ -14,10 +14,12 @@ import com.equitytest.evelynwambui_ims_app.domain.entity.SystemUser;
 import com.equitytest.evelynwambui_ims_app.domain.entity.User;
 import com.equitytest.evelynwambui_ims_app.domain.enum_.UserType;
 import com.equitytest.evelynwambui_ims_app.dto.input.UserManagementRequest;
+import com.equitytest.evelynwambui_ims_app.dto.output.ConcreteRequestResponse;
 import com.equitytest.evelynwambui_ims_app.dto.output.RequestResponse;
 import com.equitytest.evelynwambui_ims_app.repository.UserRepository;
 import com.equitytest.evelynwambui_ims_app.security.service_impl.JwtServiceImpl;
 import com.equitytest.evelynwambui_ims_app.service.UserService;
+import jakarta.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.UUID;
@@ -40,8 +42,9 @@ public class UserServiceImpl implements UserService {
 
     if (userRepository.findByUsername(userManagementRequest.getUsername()).isPresent()) {
 
-      return RequestResponse.builder()
+      return ConcreteRequestResponse.builder()
           .error(true)
+          .responseCode(1)
           .message("User already exists with username : " + userManagementRequest.getUsername())
           .build();
     }
@@ -73,8 +76,9 @@ public class UserServiceImpl implements UserService {
     } else {
       return ResponseEntity.badRequest()
           .body(
-              RequestResponse.builder()
+              ConcreteRequestResponse.builder()
                   .error(true)
+                  .responseCode(1)
                   .message("Invalid user type : " + userRole)
                   .build())
           .getBody();
@@ -95,12 +99,22 @@ public class UserServiceImpl implements UserService {
     HashMap<String, Object> additionalProperties = new HashMap<>();
     additionalProperties.put("jwtToken", jwtServiceImpl.generateToken(user));
 
-    return RequestResponse.builder()
+    return ConcreteRequestResponse.builder()
         .error(false)
         .responseCode(0)
-        .additionalProperties(additionalProperties)
         .message("User registration successful!")
+        .additionalProperties(additionalProperties)
         .build();
+  }
+
+  @Override
+  public RequestResponse loginUser(@Valid UserManagementRequest userManagementRequest) {
+    return null;
+  }
+
+  @Override
+  public RequestResponse logoutUser(@Valid UserManagementRequest userManagementRequest) {
+    return null;
   }
 
   /**
