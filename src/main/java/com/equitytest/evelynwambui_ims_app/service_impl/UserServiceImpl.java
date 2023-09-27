@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
     user.setUsername(userManagementRequest.getUsername());
     user.setPassword(passwordEncoder.encode(userManagementRequest.getPassword()));
     user.setEmailAddress(userManagementRequest.getEmailAddress());
+    user.setEmailAddressVerified(false);
     user.setCreatedAtTimestamp(localDateTime);
     user.setUpdatedAtTimestamp(localDateTime);
 

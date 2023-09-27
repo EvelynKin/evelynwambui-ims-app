@@ -20,8 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
@@ -30,7 +29,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 public abstract class User implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+  @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
+  @Column(name = "user_id", length = 50)
   private String userId;
 
   @Column(name = "full_name")
@@ -52,8 +53,8 @@ public abstract class User implements UserDetails {
   private LocalDateTime updatedAtTimestamp;
 
   @Column(name = "email_address_verified", nullable = false, columnDefinition = "BOOLEAN")
-  @Builder.Default
   private Boolean emailAddressVerified = false;
+
 
   @Transient
   public UserType getUserRole() {
