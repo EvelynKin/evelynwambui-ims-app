@@ -21,6 +21,7 @@ import com.equitytest.evelynwambui_ims_app.repository.RegularUserRepository;
 import com.equitytest.evelynwambui_ims_app.repository.SystemUserRepository;
 import com.equitytest.evelynwambui_ims_app.repository.UserRepository;
 import com.equitytest.evelynwambui_ims_app.security.service_impl.JwtServiceImpl;
+import com.equitytest.evelynwambui_ims_app.service.ProducerService;
 import com.equitytest.evelynwambui_ims_app.service.SharedUtilitiesService;
 import com.equitytest.evelynwambui_ims_app.service.UserService;
 import jakarta.validation.Valid;
@@ -32,6 +33,7 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,10 @@ public class UserServiceImpl implements UserService {
   private final JwtServiceImpl jwtServiceImpl;
   private final SharedUtilitiesService sharedUtilitiesService;
   private final PasswordEncoder passwordEncoder;
+  private final ProducerServiceImpl producerService;
+
+  @Value("${spring.kafka.inventory.consumer.group-id}")
+  private String INVENTORY_CONSUMER_ID;
 
 
   public RequestResponse registerUser(UserManagementRequest userManagementRequest) {
@@ -71,6 +77,8 @@ public class UserServiceImpl implements UserService {
 
 
     if (userExists) {
+    if (userRepository.findByUsername(userManagementRequest.getUsername()).isPresent()) {
+      producerService.sendMessage(INVENTORY_CONSUMER_ID, userManagementRequest.getUsername() +" registration");
 
       return ConcreteRequestResponse.builder()
           .error(true)
@@ -139,6 +147,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public RequestResponse loginUser(@Valid UserManagementRequest userManagementRequest) {
+
+    producerService.sendMessage(INVENTORY_CONSUMER_ID, userManagementRequest.getUsername() + "login ");
     return null;
   }
 

@@ -34,8 +34,9 @@ public class SecurityConfiguration {
         .csrf()
         .disable()
         .authorizeHttpRequests()
+            // Permit requests below without authentication
+            .requestMatchers("/management/swagger-ui/**").permitAll() // Allow access to Swagger UI
 
-        // Permit requests below without authentication
         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/authenticate")
         .permitAll()
         .requestMatchers(HttpMethod.DELETE, "/api/v1/auth/delete")
@@ -44,6 +45,11 @@ public class SecurityConfiguration {
         .permitAll()
         .requestMatchers(HttpMethod.GET, "/api/v1/user/**")
         .permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/v1/product/**")
+        .permitAll()
+        .requestMatchers(HttpMethod.GET, "/api/v1/product/**")
+        .permitAll()
+
 
         // Authenticate other requests
         .anyRequest()
