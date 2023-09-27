@@ -36,7 +36,7 @@ public class CustomUserDetailsServiceImplTest {
   @Test
   public void testLoadUserByUsername_UserFound_ReturnsUserDetails() {
     // Mock User object
-    User user = new User();
+    /*User user = new User();
     user.setUserId(1L);
     user.setUserRole(User.Role.SYSTEM_USER);
 
@@ -44,7 +44,7 @@ public class CustomUserDetailsServiceImplTest {
     Query query = mock(Query.class);
     when(entityManager.createQuery(anyString(), eq(User.class))).thenReturn(query);
     when(query.setParameter("username", "testUser")).thenReturn(query);
-    when(query.getSingleResult()).thenReturn(user);
+    when(query.getSingleResult()).thenReturn(user);*/
 
     // Mock the find methods for different user roles
     SystemUser systemUser = new SystemUser();
@@ -61,7 +61,7 @@ public class CustomUserDetailsServiceImplTest {
   public void testLoadUserByUsername_UserNotFound_ThrowsUsernameNotFoundException() {
     // Mock the EntityManager and Query to throw NoResultException
     Query query = mock(Query.class);
-    when(entityManager.createQuery(anyString(), eq(User.class))).thenReturn(query);
+    //when(entityManager.createQuery(anyString(), eq(User.class))).thenReturn(query);
     when(query.setParameter("username", "nonExistentUser")).thenReturn(query);
     when(query.getSingleResult()).thenThrow(NoResultException.class);
 

@@ -75,7 +75,7 @@ public class UserServiceImplTest {
     UserManagementRequest request = new UserManagementRequest();
     request.setUsername("existingUser");
 
-    when(userRepository.findByUsername("existingUser")).thenReturn(Optional.of(new User()));
+    //when(userRepository.findByUsername("existingUser")).thenReturn(Optional.of(new User()));
 
     RequestResponse response = userService.registerUser(request);
 
