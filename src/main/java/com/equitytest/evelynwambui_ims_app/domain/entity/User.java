@@ -23,7 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "user_details")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_role", discriminatorType = DiscriminatorType.STRING)
 public abstract class User implements UserDetails {

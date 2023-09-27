@@ -20,10 +20,23 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"fullName", "username", "password", "emailAddress"})
+@JsonPropertyOrder({
+  "fullName",
+  "username",
+  "password",
+  "emailAddress",
+  "userRole",
+  "user_description",
+  "two_factor_enabled",
+  "two_factor_secret",
+  "admin_created_by",
+  "phone_number",
+  "dob"
+})
 @Generated("jsonschema2pojo")
 public class UserManagementRequest {
 
@@ -59,5 +72,6 @@ public class UserManagementRequest {
   private String phoneNumber;
 
   @JsonProperty("dob")
-  private LocalDate dateOfBirth;
+  private String dateOfBirth;
+
 }
