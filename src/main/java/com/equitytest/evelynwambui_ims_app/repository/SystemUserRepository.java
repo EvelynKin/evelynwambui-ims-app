@@ -1,5 +1,4 @@
 /**
- * @apiNote class
  * @author Evelyn Wambui
  * @version 1.0.0
  * @created 27/09/2023
