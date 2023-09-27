@@ -15,9 +15,9 @@ public class ProductConsumer {
 
     private final ProductServiceImpl productService;
 
-    @KafkaListener(topics = "product-csv-topic")
+   /* @KafkaListener(topics = "product-csv-topic")
     public void processCSV(String csvData) {
-        /*CSVReader csvReader = new CSVReaderBuilder(new StringReader(csvData))
+        CSVReader csvReader = new CSVReaderBuilder(new StringReader(csvData))
                 .withSkipLines(1) // Skip header if present
                 .build();
         List<String[]> csvRows = csvReader.readAll();
@@ -33,7 +33,7 @@ public class ProductConsumer {
             product.setTag(row[5]);
 
             // Save product to the database
-            productService.createProduct(product);*/
-        //}
-    }
+            productService.createProduct(product);
+        }
+    }*/
 }

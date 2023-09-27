@@ -1,5 +1,4 @@
 /**
- * @apiNote class
  * @version 1.0.0
  * @created 26/09/2023
  * @since 1.0.0

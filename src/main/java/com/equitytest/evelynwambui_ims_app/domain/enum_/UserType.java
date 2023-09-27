@@ -3,7 +3,6 @@
  * @version 1.0.0
  * @apiNote UserRole enum
  * @created 01/05/2023
- * @see
  * @since 1.0.0
  */
 package com.equitytest.evelynwambui_ims_app.domain.enum_;

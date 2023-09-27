@@ -2,8 +2,7 @@
  * @author Evelyn Wambui
  * @version 1.0.0
  * @apiNote JwtServiceImpl class
- * @created 01/05/2023
- * @see com.equitytest.evelynwambui_ims_app.security.authentication_filter.JwtAuthenticationFilter
+ * @created 01/05/2023 com.equitytest.evelynwambui_ims_app.security.authentication_filter.JwtAuthenticationFilter
  * @since 1.0.0
  */
 package com.equitytest.evelynwambui_ims_app.security.service_impl;
