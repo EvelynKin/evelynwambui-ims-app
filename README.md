@@ -47,10 +47,14 @@ The Inventory Management System is built using either Spring Boot (Java) or Djan
 
 3. **Documentation:** Provision of a valid OpenAPI spec version 3.0.3 document.
 
+<br><br>
+
 # Project Design
  - Framework - Java Springboot
  - Security - Spring 6.0 with jwt and user authentication
  - Multi-user user management and roles.
  - Unit Testing - Junit Platform and Mockito
  - Logging - Sl4j and Logger with custom configuration
+ - Database - MySQL
+ - Documentation - OpenApi Swagger and Javadoc
 
