@@ -169,7 +169,7 @@ public class UserServiceImpl implements UserService {
      *
      * @return String
      */
-    private String generateUserId() {
+    public String generateUserId() {
         return "user-" + UUID.randomUUID();
     }
 }
