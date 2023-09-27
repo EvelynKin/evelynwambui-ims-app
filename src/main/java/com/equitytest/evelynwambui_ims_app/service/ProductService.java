@@ -11,5 +11,4 @@ public interface ProductService {
     Product updateProduct(Long id, Product product);
     void deleteProduct(Long id);
     List<Product> searchProducts(String keyword);
-    // Add other custom methods for filtering as needed
 }
