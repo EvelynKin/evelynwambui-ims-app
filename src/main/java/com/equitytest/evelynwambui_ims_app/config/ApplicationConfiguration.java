@@ -5,10 +5,10 @@
  * @apiNote ApplicationConfiguration class
  * @since 1.0.0
  */
-
 package com.equitytest.evelynwambui_ims_app.config;
 
-import com.equitytest.evelynwambui_ims_app.security.repository.SystemAuthUserRepository;
+import com.equitytest.evelynwambui_ims_app.service_impl.CustomUserDetailsServiceImpl;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +25,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfiguration {
 
-  private final SystemAuthUserRepository systemAuthUserRepository;
-
   /**
    * Bean to initialize the UserDetailsService
    *
@@ -34,12 +32,8 @@ public class ApplicationConfiguration {
    * @throws UsernameNotFoundException - If user not found
    */
   @Bean
-  public UserDetailsService userDetailsService() throws UsernameNotFoundException {
-    return username ->
-        systemAuthUserRepository
-            .findByUsername(username)
-            .orElseThrow(
-                () -> new UsernameNotFoundException("User not found with username : " + username));
+  public UserDetailsService userDetailsService(EntityManager entityManager) {
+    return new CustomUserDetailsServiceImpl(entityManager);
   }
 
   /**
@@ -48,17 +42,16 @@ public class ApplicationConfiguration {
    * @return DaoAuthenticationProvider
    */
   @Bean
-  public AuthenticationProvider authenticationProvider() {
+  public AuthenticationProvider authenticationProvider(EntityManager entityManager) {
 
     DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 
     // Set what user details service to use to get user details in case of multiple implementations
     // of the user details e.g., getting info from the database, or different profiles fetching data
     // from the in-memory database, LDAP etc.
-    daoAuthenticationProvider.setUserDetailsService(userDetailsService());
+    daoAuthenticationProvider.setUserDetailsService(userDetailsService(entityManager));
 
-    daoAuthenticationProvider.setPasswordEncoder(
-        passwordEncoder()); // Set password encoder to be used
+    daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
 
     return daoAuthenticationProvider;
   }
@@ -70,7 +63,13 @@ public class ApplicationConfiguration {
    * @throws Exception - exception
    */
   @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+  public AuthenticationManager authenticationManager(
+      AuthenticationConfiguration authenticationConfiguration, EntityManager entityManager)
+      throws Exception {
+    DaoAuthenticationProvider authenticationProvider =
+        (DaoAuthenticationProvider) authenticationProvider(entityManager);
+    authenticationProvider.setUserDetailsService(userDetailsService(entityManager));
+
     return authenticationConfiguration.getAuthenticationManager();
   }
 

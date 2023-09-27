@@ -18,11 +18,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@DiscriminatorValue("ADMIN")
-public class AdminUser extends User {
-
-  @Column(name = "admin_created_by")
-  private String adminCreatedBy;
+@DiscriminatorValue("SYSTEM")
+public class SystemUser extends User {
 
   @Column(name = "user_description", nullable = false, length = 300)
   private String userDescription;
