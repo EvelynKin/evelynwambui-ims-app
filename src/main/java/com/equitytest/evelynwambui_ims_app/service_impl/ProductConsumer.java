@@ -1,7 +1,6 @@
 package com.equitytest.evelynwambui_ims_app.service_impl;
 
 import com.equitytest.evelynwambui_ims_app.domain.entity.Product;
-import com.equitytest.evelynwambui_ims_app.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class ProductConsumer {
 
     @KafkaListener(topics = "product-csv-topic")
     public void processCSV(String csvData) {
-        CSVReader csvReader = new CSVReaderBuilder(new StringReader(csvData))
+        /*CSVReader csvReader = new CSVReaderBuilder(new StringReader(csvData))
                 .withSkipLines(1) // Skip header if present
                 .build();
         List<String[]> csvRows = csvReader.readAll();
@@ -34,7 +33,7 @@ public class ProductConsumer {
             product.setTag(row[5]);
 
             // Save product to the database
-            productService.createProduct(product);
-        }
+            productService.createProduct(product);*/
+        //}
     }
 }
