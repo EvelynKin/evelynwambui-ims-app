@@ -70,8 +70,6 @@ public class ProductServiceImplTest {
     assertEquals(null, result);
   }
 
-  // Similar tests can be written for createProduct, updateProduct, and deleteProduct methods
-
   @Test
   public void testSearchProducts() {
     // Mock data
