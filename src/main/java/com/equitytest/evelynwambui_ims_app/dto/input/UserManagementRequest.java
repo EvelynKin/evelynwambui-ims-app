@@ -72,5 +72,6 @@ public class UserManagementRequest {
   private String phoneNumber;
 
   @JsonProperty("dob")
-  private LocalDate dateOfBirth;
+  private String dateOfBirth;
+
 }

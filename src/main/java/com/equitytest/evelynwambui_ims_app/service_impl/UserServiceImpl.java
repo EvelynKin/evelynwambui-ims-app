@@ -16,12 +16,19 @@ import com.equitytest.evelynwambui_ims_app.domain.enum_.UserType;
 import com.equitytest.evelynwambui_ims_app.dto.input.UserManagementRequest;
 import com.equitytest.evelynwambui_ims_app.dto.output.ConcreteRequestResponse;
 import com.equitytest.evelynwambui_ims_app.dto.output.RequestResponse;
+import com.equitytest.evelynwambui_ims_app.repository.AdminUserRepository;
+import com.equitytest.evelynwambui_ims_app.repository.RegularUserRepository;
+import com.equitytest.evelynwambui_ims_app.repository.SystemUserRepository;
 import com.equitytest.evelynwambui_ims_app.repository.UserRepository;
 import com.equitytest.evelynwambui_ims_app.security.service_impl.JwtServiceImpl;
+import com.equitytest.evelynwambui_ims_app.service.SharedUtilitiesService;
 import com.equitytest.evelynwambui_ims_app.service.UserService;
 import jakarta.validation.Valid;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,12 +42,35 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
+  private final SystemUserRepository systemUserRepository;
+  private final AdminUserRepository adminUserRepository;
+  private final RegularUserRepository regularUserRepository;
+
   private final JwtServiceImpl jwtServiceImpl;
+  private final SharedUtilitiesService sharedUtilitiesService;
   private final PasswordEncoder passwordEncoder;
+
 
   public RequestResponse registerUser(UserManagementRequest userManagementRequest) {
 
-    if (userRepository.findByUsername(userManagementRequest.getUsername()).isPresent()) {
+
+    String userRole = userManagementRequest.getUserRole();
+    boolean userExists = false;
+
+    if (UserType.SYSTEM_USER.getUserRole().equals(userRole)) {
+      Optional<SystemUser> user = systemUserRepository.findByUsername(userManagementRequest.getUsername());
+      userExists = user.isPresent();
+    }
+    if (UserType.SYSTEM_USER.getUserRole().equals(userRole)) {
+      Optional<AdminUser> user = adminUserRepository.findByUsername(userManagementRequest.getUsername());
+      userExists = user.isPresent();
+    } if (UserType.SYSTEM_USER.getUserRole().equals(userRole)) {
+      Optional<RegularUser> user = regularUserRepository.findByUsername(userManagementRequest.getUsername());
+      userExists = user.isPresent();
+    }
+
+
+    if (userExists) {
 
       return ConcreteRequestResponse.builder()
           .error(true)
@@ -49,9 +79,8 @@ public class UserServiceImpl implements UserService {
           .build();
     }
 
-    User user;
-    String userRole = userManagementRequest.getUserRole();
 
+    User user;
     if (UserType.SYSTEM_USER.getUserRole().equals(userRole)) {
       SystemUser systemUser = new SystemUser();
       systemUser.setUserDescription(userManagementRequest.getUserDescription());
@@ -70,7 +99,7 @@ public class UserServiceImpl implements UserService {
     } else if (UserType.REGULAR_USER.getUserRole().equalsIgnoreCase(userRole)) {
       RegularUser regularUser = new RegularUser();
       regularUser.setPhoneNumber(userManagementRequest.getPhoneNumber());
-      regularUser.setDateOfBirth(userManagementRequest.getDateOfBirth());
+      regularUser.setDateOfBirth(sharedUtilitiesService.parseToLocalDate(userManagementRequest.getDateOfBirth()));
       user = regularUser;
 
     } else {

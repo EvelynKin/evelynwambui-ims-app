@@ -15,10 +15,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequestMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -30,21 +27,20 @@ public class UserController {
 
   @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
   public RequestResponse loginUser(
-      @RequestParam @Valid UserManagementRequest userManagementRequest) {
+      @RequestBody @Valid UserManagementRequest userManagementRequest) {
     return userService.loginUser(userManagementRequest);
   }
 
   @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
   public RequestResponse registerUser(
-      @RequestParam @Valid UserManagementRequest userManagementRequest) {
+      @RequestBody @Valid UserManagementRequest userManagementRequest) {
     log.error(userManagementRequest.toString());
     return userService.registerUser(userManagementRequest);
   }
 
   @PostMapping(value = "/logout", consumes = MediaType.APPLICATION_JSON_VALUE)
   public RequestResponse logoutUser(
-      @RequestParam @Valid UserManagementRequest userManagementRequest) {
+      @RequestBody @Valid UserManagementRequest userManagementRequest) {
     return userService.logoutUser(userManagementRequest);
   }
-
 }
